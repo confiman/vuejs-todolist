@@ -10,7 +10,7 @@
   
   <body>
      <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="./assets/logo.jpg">
     <TodoList msg="Modanisa TodoList Application"/>
   </div>
   </body>
