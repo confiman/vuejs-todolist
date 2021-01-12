@@ -1,19 +1,13 @@
-FROM node:lts-alpine
-
-# make the 'app' folder the current working directory
+# build stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
-
-# install project dependencies
+COPY package*.json ./
 RUN npm install
-
-# build app for production with minification
+COPY . .
 RUN npm run build
 
-RUN npm install -g serve
-
-
-EXPOSE 8080
-ENTRYPOINT [ "npm", "run", "serve" ]
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

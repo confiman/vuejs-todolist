@@ -48,29 +48,29 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://localhost:8081/todos').then(response => {this.todos=response.data
+    axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => {this.todos=response.data
     console.log(this.todos)})
   },
   methods: {
     addTodo: function () {
       if(this.newTodo.length > 0) {
-        axios.post('http://localhost:8081/todos/',  {message: this.newTodo, isActive:true}).then(() => axios.get('http://localhost:8081/todos').then(response => this.todos=response.data))
+        axios.post('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos/',  {message: this.newTodo, isActive:true}).then(() => axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => this.todos=response.data))
         this.newTodo=""
       }
     },
     removeTodo: function (todo) {
-      axios.get('http://localhost:8081/todos').then(response => response.data.forEach(element => {
+      axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => response.data.forEach(element => {
         if(element.id == todo.id) {
-          axios.delete('http://localhost:8081/todos/' + element.id)
+          axios.delete('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos/' + element.id)
         }
       }))
       this.todos.splice(this.todos.indexOf(todo), 1)
     },
     updateTodo: function (todo) {
       todo.isActive = !todo.isActive
-      axios.get('http://localhost:8081/todos').then(response => response.data.forEach(element => {
+      axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => response.data.forEach(element => {
         if(element.id == todo.id) {
-          axios.put('http://localhost:8081/todos/' + element.id, {message: todo.message, isActive:todo.isActive})
+          axios.put('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos/' + element.id, {message: todo.message, isActive:todo.isActive})
         }
       }))
     }
