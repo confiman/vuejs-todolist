@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: docker build --no-cache -t confiman/vuejs-todolist:latest .
       - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-      - run: docker push confiman/confiman/vuejs-todolist:latest
+      - run: docker push confiman/vuejs-todolist:latest
   
   deploy-to-stage:
     machine: true
