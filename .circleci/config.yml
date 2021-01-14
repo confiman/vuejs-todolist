@@ -9,6 +9,7 @@ jobs:
     machine: true
     steps:
       - checkout
+      - run: npm run test:unit
       - run: docker build --no-cache -t confiman/vuejs-todolist:latest .
       - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
       - run: docker push confiman/vuejs-todolist:latest

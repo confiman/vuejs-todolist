@@ -5,11 +5,11 @@
       <div style="width: 400px">
     <md-field>
       <label>TODO</label>
-      <md-input v-model="newTodo"></md-input>
+      <md-input id="todoInput" v-model="newTodo"></md-input>
     </md-field>
     </div>
     <div>
-    <md-button class="md-raised md-primary" @click="addTodo()"
+    <md-button id="addButton" class="md-raised md-primary" @click="addTodo()"
       >ADD</md-button
     >
     </div>
