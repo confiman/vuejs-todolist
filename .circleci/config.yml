@@ -4,6 +4,14 @@ orbs:
 version: 2.1
 
 jobs:
+
+  run-tests:
+    machine: true
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test:unit
   
   build-push-docker-image:
     machine: true
@@ -30,7 +38,10 @@ jobs:
 workflows:
   deployment:
     jobs:
-      - build-push-docker-image
+      - run-tests
+      - build-push-docker-image:
+          requires:
+            - run-tests
       - deploy-to-stage:
           requires:
             - build-push-docker-image
