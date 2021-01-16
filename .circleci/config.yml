@@ -10,10 +10,15 @@ jobs:
       - image: circleci/node:8-browsers
     steps:
       - checkout
-      - run: npm -v
       - run: npm install
       - run: npm run lint
       - run: npm run test:unit
+
+  run-e2e-test:
+    machine: true
+    steps:
+      - checkout
+      - run: echo 'Running e2e tests..'
   
   build-push-docker-image:
     machine: true
@@ -41,9 +46,11 @@ workflows:
   deployment:
     jobs:
       - run-unit-test
+      - run-e2e-test
       - build-push-docker-image:
           requires:
             - run-unit-test
+            - run-e2e-test
       - deploy-to-stage:
           requires:
             - build-push-docker-image
