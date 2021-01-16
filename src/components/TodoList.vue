@@ -15,7 +15,7 @@
     </div>
     </div>
     <div style="width:500px">
-    <md-list>
+    <md-list id="toDoList">
       <md-list-item v-for="todo in todos" :key="todo.id">
         <span
           class="md-list-item-text cursor"
@@ -48,8 +48,7 @@ export default {
     };
   },
   mounted() {
-    axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => {this.todos=response.data
-    console.log(this.todos)})
+    axios.get('https://modanisa-devops-challenge.westeurope.cloudapp.azure.com/todos').then(response => {this.todos=response.data})
   },
   methods: {
     addTodo: function () {
