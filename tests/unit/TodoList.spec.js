@@ -1,7 +1,6 @@
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import TodoList from '@/components/TodoList.vue'
 import VueMaterial from 'vue-material'
-import Vue from 'vue';
 
 
 
