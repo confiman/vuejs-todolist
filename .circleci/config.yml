@@ -43,7 +43,7 @@ workflows:
       - run-unit-test
       - build-push-docker-image:
           requires:
-            - run-tests
+            - run-unit-test
       - deploy-to-stage:
           requires:
             - build-push-docker-image
