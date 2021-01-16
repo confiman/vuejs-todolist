@@ -5,8 +5,9 @@ version: 2.1
 
 jobs:
 
-  run-tests:
-    machine: true
+  run-unit-test:
+    docker:
+      - image: circleci/node:8-browsers
     steps:
       - checkout
       - run: npm -v
@@ -39,7 +40,7 @@ jobs:
 workflows:
   deployment:
     jobs:
-      - run-tests
+      - run-unit-test
       - build-push-docker-image:
           requires:
             - run-tests
