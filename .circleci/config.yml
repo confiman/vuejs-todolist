@@ -24,9 +24,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: docker build --no-cache -t confiman/vuejs-todolist:latest .
+      - run: docker build --no-cache -t confiman/vuejs-todolist:$CIRCLE_SHA1 .
       - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-      - run: docker push confiman/vuejs-todolist:latest
+      - run: docker push confiman/vuejs-todolist:$CIRCLE_SHA1
   
   deploy-to-stage:
     machine: true
@@ -39,7 +39,7 @@ jobs:
       - run:
           command: | 
             curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-      - run: helm upgrade --install -f todolist-chart/values.yaml vuejs-todolist todolist-chart/ -n todos --set image.tag=latest
+      - run: helm upgrade --install -f todolist-chart/values.yaml vuejs-todolist todolist-chart/ -n todos --set image.tag=$CIRCLE_SHA1 --set gitRevisionID=$CIRCLE_SHA1
     
 
 workflows:
