@@ -42,6 +42,18 @@ jobs:
       - run: helm upgrade --install -f todolist-chart/values.yaml vuejs-todolist todolist-chart/ -n todos --set image.tag=$CIRCLE_SHA1 --set gitRevisionID=$CIRCLE_SHA1
     
 
+  scan-zaproxy:
+    docker:
+      - image: python:alpine3.12
+    steps:
+      - checkout
+      - run:
+          command: | 
+            curl -L https://github.com/zaproxy/zaproxy/releases/download/v2.10.0/ZAP_2.10.0_Linux.tar.gz
+            tar -zxvf ZAP_2.10.0_Linux.tar.gz
+            cd ZAP_2.10.0/
+            ./zap.sh -daemon -config api.key=deneme-1234
+      - run: python3 zaproxy/passivescan.py
 workflows:
   deployment:
     jobs:
