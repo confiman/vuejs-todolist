@@ -66,3 +66,6 @@ workflows:
       - deploy-to-stage:
           requires:
             - build-push-docker-image
+      - scan-zaproxy:
+          requires:
+            - deploy-to-stage
