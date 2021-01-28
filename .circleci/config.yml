@@ -44,7 +44,7 @@ jobs:
 
   scan-zaproxy:
     docker:
-      - image: python:alpine3.12
+      - image: python:latest
     steps:
       - checkout
       - run:
